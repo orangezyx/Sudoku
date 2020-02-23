@@ -2,13 +2,14 @@
 A simple Python sudoku solver
 
 # Usage
-Request:
-1. At least use Python 3.x
-2. Run code with 
-'
-python3 Sudoku.py test1.csv
-''
-3. The csv file should like this:
+Request: Python 3.x
+
+Run code with
+```
+$ python3 Sudoku.py test1.csv
+```
+
+The csv file should like this:
 
 ---
 
