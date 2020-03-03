@@ -86,14 +86,14 @@ class Sudoku(object):
             self.try_it(x, y)
         end = datetime.datetime.now()
 
-        print('+-----------------------+')
+        print('+-------+-------+-------+')
         i = 0
         for j in self.b:
             i += 1
             print(f'| {j[0]} {j[1]} {j[2]} | {j[3]} {j[4]} {j[5]} | {j[6]} {j[7]} {j[8]} |')
             if i == 3 or i == 6:
                 print('+-------+-------+-------+')
-        print('+-----------------------+')
+        print('+-------+-------+-------+')
         print('Total cost time:', end - begin)
         print('Try times:', self.t)
 
