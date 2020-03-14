@@ -86,6 +86,12 @@ class Sudoku(object):
             self.try_it(x, y)
         end = datetime.datetime.now()
 
+        for i in self.b:
+            for j in i:
+                if j == 0:
+                    print('Failure to solve, the given Sudoku is unsolved or the Sudoku is given incorrectly.')
+                    return
+
         print('+-------+-------+-------+')
         i = 0
         for j in self.b:
@@ -99,7 +105,6 @@ class Sudoku(object):
 
 
 usage = 'Usage: Sudoku.py <FILE>\n      -h, --help        Print this help'
-
 
 def main(argv):
     lines = None
@@ -116,10 +121,16 @@ def main(argv):
         print('Error: File do not exists!')
         return
 
+    FormatErrorMessage = 'Error: Sudoku format error, type -h or --help for more.'
     lines = f.read().splitlines()
     if len(lines) != 9:
-        print('Error: Sudoku format error, type -h or --help for more.')
+        print(FormatErrorMessage + "\nLine count error, request 9 lines, found %d lines." % len(lines))
         return
+    for i in range(9):
+        if lines[i].count(',') != 8:
+            print(FormatErrorMessage + ("\nComma count error, request 8 commas per line, found %d commas in line %d." % (lines[i].count(','), i + 1)))
+            return
+
     grid = map(lambda i: i.split(","), lines)
 
     def new_int(t):
@@ -129,7 +140,6 @@ def main(argv):
 
     s = Sudoku(grid)
     s.solve()
-
 
 if __name__ == '__main__':
     main(sys.argv)
