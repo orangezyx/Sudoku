@@ -1,0 +1,10 @@
+# VSCode files
+.vs
+
+# Build files
+build
+dist
+__pycache__
+
+# Other files
+*.spec
