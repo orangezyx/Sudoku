@@ -58,7 +58,7 @@ class Sudoku(object):
         columns = [[r[col] for r in self.b] for col in range(len(self.b[0]))]
         for i in range(9):
             for j in columns[i]:
-                if (j not in range(0, 10)) or (self.b[i].count(j) > 1 and j != 0):
+                if (j not in range(0, 10)) or (columns[i].count(j) > 1 and j != 0):
                     return False, 'There are %d same number %d in column %d.' % (self.b[i].count(j), j, (i + 1))
         # 判断九宫格是否有效
         for i in range(3):
@@ -70,13 +70,14 @@ class Sudoku(object):
                         return False, 'There are %d same number %d in block %d.' \
                                % (merge_str.count(m), m, (3 * i + j + 1))
         return True, 'OK'
+    
 
     def solve(self):
-        is_legal, error_s = self.check_is_legal()
-        if not is_legal:
-            print("Error: The sudoku is illegal!")
-            print(error_s)
-            return
+        s = ''
+        legal, error_s = self.check_is_legal()
+        if not legal:
+            s += "Error: The sudoku is illegal!\n" + error_s
+            return s
 
         begin = datetime.datetime.now()
         if self.b[0][0] == 0:
@@ -89,19 +90,20 @@ class Sudoku(object):
         for i in self.b:
             for j in i:
                 if j == 0:
-                    print('Failure to solve, the given Sudoku is unsolved or the Sudoku is given incorrectly.')
-                    return
-
-        print('+-------+-------+-------+')
+                    s = 'Failure to solve, the given Sudoku is unsolved or the Sudoku is given incorrectly.'
+                    return s
+        
+        s += '+-------+-------+-------+\n'
         i = 0
         for j in self.b:
             i += 1
-            print(f'| {j[0]} {j[1]} {j[2]} | {j[3]} {j[4]} {j[5]} | {j[6]} {j[7]} {j[8]} |')
+            s += f'| {j[0]} {j[1]} {j[2]} | {j[3]} {j[4]} {j[5]} | {j[6]} {j[7]} {j[8]} |\n'
             if i == 3 or i == 6:
-                print('+-------+-------+-------+')
-        print('+-------+-------+-------+')
-        print('Total cost time:', end - begin)
-        print('Try times:', self.t)
+                s += '+-------+-------+-------+\n'
+        s += '+-------+-------+-------+\n'
+        s += 'Total cost time: ' + str((end - begin))
+        s += '\nTry times: ' + str(self.t)
+        return s
 
 
 usage = 'Usage: Sudoku.py <FILE>\n      -h, --help        Print this help'
@@ -139,7 +141,7 @@ def main(argv):
     grid = [list(map(new_int, i)) for i in grid]
 
     s = Sudoku(grid)
-    s.solve()
+    print(s.solve())
 
 if __name__ == '__main__':
     main(sys.argv)

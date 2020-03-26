@@ -5,11 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Sudoku",
+            "name": "SudokuCLI",
             "type": "python",
             "request": "launch",
             "program": "${workspaceRoot}/Sudoku.py",
             "args": ["test1.csv"],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "SudokuGUI",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/SudokuGUI.py",
             "console": "integratedTerminal"
         }
     ]
