@@ -106,7 +106,7 @@ class Sudoku(object):
         return s
 
 
-usage = 'Usage: Sudoku.py <FILE>\n      -h, --help        Print this help'
+usage = '''Usage: Sudoku.py <FILE>\n      -h, --help        Print this help'''
 
 def main(argv):
     lines = None

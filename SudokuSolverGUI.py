@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from Sudoku import Sudoku
+from SudokuSolver import Sudoku
 import tkinter as tk
 import tkinter.messagebox as mb
 
