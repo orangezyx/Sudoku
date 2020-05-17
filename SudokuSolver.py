@@ -3,7 +3,7 @@ import datetime
 import sys
 
 
-class Sudoku(object):
+class SudokuSolver(object):
     def __init__(self, board):
         self.b = board
         self.t = 0
@@ -18,7 +18,8 @@ class Sudoku(object):
                     return row_n, col_n
         return -1, -1  # 若无下一个未填项，返回-1
 
-    block_in_grid = {(x, y): (x // 3) * 3 + (y // 3) for x in range(9) for y in range(9)}
+    block_in_grid = {(x, y): (x // 3) * 3 + (y // 3)
+                     for x in range(9) for y in range(9)}
     grid_get_block = {x: [] for x in range(9)}
 
     for i, j in block_in_grid.items():
@@ -63,14 +64,14 @@ class Sudoku(object):
         # 判断九宫格是否有效
         for i in range(3):
             for j in range(3):
-                grid = [tem[j * 3:(j + 1) * 3] for tem in self.b[i * 3:(i + 1) * 3]]
+                grid = [tem[j * 3:(j + 1) * 3]
+                        for tem in self.b[i * 3:(i + 1) * 3]]
                 merge_str = grid[0] + grid[1] + grid[2]  # 合并为一个list[]
                 for m in merge_str:
                     if (m not in range(0, 10)) or (merge_str.count(m) > 1 and m != 0):
                         return False, 'There are %d same number %d in block %d.' \
-                               % (merge_str.count(m), m, (3 * i + j + 1))
+                            % (merge_str.count(m), m, (3 * i + j + 1))
         return True, 'OK'
-    
 
     def solve(self):
         s = ''
@@ -92,7 +93,7 @@ class Sudoku(object):
                 if j == 0:
                     s = 'Failure to solve, the given Sudoku is unsolved or the Sudoku is given incorrectly.'
                     return s
-        
+
         s += '+-------+-------+-------+\n'
         i = 0
         for j in self.b:
@@ -107,6 +108,7 @@ class Sudoku(object):
 
 
 usage = '''Usage: Sudoku.py <FILE>\n      -h, --help        Print this help'''
+
 
 def main(argv):
     lines = None
@@ -126,11 +128,13 @@ def main(argv):
     FormatErrorMessage = 'Error: Sudoku format error, type -h or --help for more.'
     lines = f.read().splitlines()
     if len(lines) != 9:
-        print(FormatErrorMessage + "\nLine count error, request 9 lines, found %d lines." % len(lines))
+        print(FormatErrorMessage +
+              "\nLine count error, request 9 lines, found %d lines." % len(lines))
         return
     for i in range(9):
         if lines[i].count(',') != 8:
-            print(FormatErrorMessage + ("\nComma count error, request 8 commas per line, found %d commas in line %d." % (lines[i].count(','), i + 1)))
+            print(FormatErrorMessage + ("\nComma count error, request 8 commas per line, found %d commas in line %d." %
+                                        (lines[i].count(','), i + 1)))
             return
 
     grid = map(lambda i: i.split(","), lines)
@@ -142,6 +146,7 @@ def main(argv):
 
     s = Sudoku(grid)
     print(s.solve())
+
 
 if __name__ == '__main__':
     main(sys.argv)
