@@ -75,7 +75,7 @@ class SudokuGame(object):
         self.game_frm.getch()
 
 
-class BoarkGenerator(object):
+class BoardGenerator(object):
     def generate(self, clean_nums):  # 生成数独
         # 初始网格
         result = []

@@ -14,7 +14,7 @@ class SudokuGameGUI(object):
         f1 = tk.Frame(mainWindow)
         f1.place(x=20, y=20)
 
-        self.board = SudokuGame.BoarkGenerator.generate(self, 40)
+        self.board = SudokuGame.BoardGenerator.generate(self, 40)
         for i in range(9):
             for j in range(9):
                 if self.board[i][j] == ' ':
