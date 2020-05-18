@@ -56,7 +56,12 @@ class SudokuSolverGUI(object):
                 f.close()
                 for i in range(9):
                     for j in range(9):
-                        self.es[i * 9 + j].set(txt[i].split(',')[j])
+                        tmp = ''
+                        if txt[i].split(',')[j] == '\n':
+                            tmp = ''
+                        else:
+                            tmp = txt[i].split(',')[j]
+                        self.es[i * 9 + j].set(tmp)
 
         go = tk.Button(mainWindow, text='Go!', width=20, command=click)
         go.place(x=250, y=360)

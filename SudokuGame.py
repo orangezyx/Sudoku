@@ -50,7 +50,7 @@ class SudokuGame(object):
         elif diff == 4:
             n = random.randint(20, 24)
 
-        self.board = BoarkGenerator.generate(self, n)  # 生成带几个数字的 board
+        self.board = BoardGenerator.generate(self, n)  # 生成带几个数字的 board
 
         base_ui = '+-------+-------+-------+\n'
         i = 0

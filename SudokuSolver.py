@@ -144,7 +144,7 @@ def main(argv):
 
     grid = [list(map(new_int, i)) for i in grid]
 
-    s = Sudoku(grid)
+    s = SudokuSolver(grid)
     print(s.solve())
 
 
