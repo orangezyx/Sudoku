@@ -6,8 +6,8 @@ import tkinter.filedialog
 
 
 class SudokuSolverGUI(object):
-    def __init__(self):
-        mainWindow = tk.Tk()
+    def __init__(self): #init window
+        mainWindow = tk.Tk()  # 新建窗体对象
         mainWindow.title('SudokuSolver GUI Application')
         mainWindow.geometry('750x400')
 
@@ -21,7 +21,7 @@ class SudokuSolverGUI(object):
                 ent = tk.Entry(f1, text='', width=2,
                                font=('Helvetica', '20', 'bold'), textvariable=self.es[i * 9 + j])
                 self.texts.append(ent)
-                ent.grid(row=i, column=j)
+                ent.grid(row=i, column=j) # 放入文本框 并且绑定数值
 
         labels = []
         f2 = tk.Frame(mainWindow)
@@ -31,9 +31,9 @@ class SudokuSolverGUI(object):
                 lab = tk.Label(f2, text='0', width=2,
                                font=('Helvetica', '20', 'bold'))
                 labels.append(lab)
-                lab.grid(row=i, column=j)
+                lab.grid(row=i, column=j) # 放入标签并且绑定数据
 
-        def click():
+        def click(): # button click event
             def new_int(t):
                 return int(t) if t else 0
             grid = [list(new_int(t.get()) for t in self.texts[i * 9 : i * 9 + 9])
@@ -46,7 +46,7 @@ class SudokuSolverGUI(object):
                     for j in range(9):
                         lbs[i][j].config(text=s.b[i][j])
             else:
-                mb.showerror(message=r)
+                mb.showerror(message=r) # 单击按钮 调用解题类
 
         def open_file():
             fn = tk.filedialog.askopenfilename(title='选择一个文件', filetypes=[('CSV','*.csv')])
@@ -61,7 +61,7 @@ class SudokuSolverGUI(object):
                             tmp = ''
                         else:
                             tmp = txt[i].split(',')[j]
-                        self.es[i * 9 + j].set(tmp)
+                        self.es[i * 9 + j].set(tmp) # 浏览文件
 
         go = tk.Button(mainWindow, text='Go!', width=20, command=click)
         go.place(x=250, y=360)
